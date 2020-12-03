@@ -1,6 +1,6 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule,ConfigService } from '@nestjs/config';
-import { CONFIGURATION } from '../configuration.keys';
+import { Configuration } from '../configuration.keys';
 import { ConnectionOptions } from 'typeorm';
 
 export const databaseProvider = TypeOrmModule.forRootAsync({
@@ -8,7 +8,7 @@ export const databaseProvider = TypeOrmModule.forRootAsync({
     inject:[ConfigService],
     useFactory: async(config:ConfigService)=>({
         type:'mysql',
-        url:config.get<string>(CONFIGURATION.DATABASE_URI),
+        url:config.get<string>(Configuration.DATABASE_URI),
         entities:[__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize:true
     } as ConnectionOptions)
