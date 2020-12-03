@@ -14,7 +14,7 @@ export default class User extends BaseEntity {
     @Column({default:'no_avatar.png'})
     avatar:string;
 
-    @Column({nullable:false})
+    @Column({nullable:false,unique:true})
     email:string;
 
     @Column({nullable:false})

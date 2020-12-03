@@ -9,7 +9,7 @@ export const databaseProvider = TypeOrmModule.forRootAsync({
     useFactory: async(config:ConfigService)=>({
         type:'mysql',
         url:config.get<string>(Configuration.DATABASE_URI),
-        entities:[__dirname + '/../**/*.entity{.ts,.js}'],
+        entities:[__dirname + '/../../**/*.entity{.ts,.js}'],
         synchronize:true
     } as ConnectionOptions)
 });
