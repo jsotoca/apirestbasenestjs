@@ -11,6 +11,7 @@ export default class UserRepository extends Repository<User> {
         user.fullname = fullname.replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
         user.email = email;
         user.password = password;
+        if(avatar) user.avatar = avatar;
         try {
             await user.save();
             return user;

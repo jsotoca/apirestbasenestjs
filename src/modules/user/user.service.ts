@@ -11,7 +11,7 @@ export class UserService {
     ){}
 
     async signUp(signUpDTO:SignUpDTO,avatar?:any){
-        const user = await this.userRepository.signUp(signUpDTO);
+        const user = await this.userRepository.signUp(signUpDTO,avatar);
         return user;
     }
 }

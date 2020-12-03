@@ -14,8 +14,9 @@ export class AuthController {
     @UseInterceptors(FileInterceptor('avatar'))
     async signUp(
         @Body() signUpDTO:SignUpDTO,
-        @UploadedFile() file:any
+        @UploadedFile() avatar:any
     ){
-        return await this.authService.signUp(signUpDTO);
+        const image = (avatar)?avatar:null;
+        return await this.authService.signUp(signUpDTO,image);
     }
 }

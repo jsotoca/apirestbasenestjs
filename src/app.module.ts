@@ -4,6 +4,7 @@ import { Configuration } from './configuration/configuration.keys';
 import { DatabaseModule } from './configuration/database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
+import { ServicesModule } from './services/services.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { UserModule } from './modules/user/user.module';
     DatabaseModule,
     AuthModule,
     UserModule,
+    ServicesModule,
   ],
   controllers: [
     

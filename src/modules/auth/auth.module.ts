@@ -1,3 +1,4 @@
+import { ServicesModule } from './../../services/services.module';
 import { JwtProvider } from './jwt/jwt.provider';
 import { UserModule } from './../user/user.module';
 import { Module } from '@nestjs/common';
@@ -9,6 +10,7 @@ import JWTHelpers from './jwt/jwt';
   imports: [
     UserModule,
     JwtProvider,
+    ServicesModule
   ],
   controllers: [AuthController],
   providers: [AuthService,JWTHelpers]
