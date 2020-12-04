@@ -3,13 +3,15 @@ import { UserService } from './../user/user.service';
 import { Injectable } from '@nestjs/common';
 import SignUpDTO from './dto/signup.dto';
 import JwtHelpers from './jwt/jwt';
+import NodeMailerService from 'src/services/nodemailer/nodemailer.service';
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly userService:UserService,
         private readonly jwtHelpers:JwtHelpers,
-        private readonly S3:S3Service
+        private readonly S3:S3Service,
+        private readonly nodeMailerService:NodeMailerService
     ){}
 
     async signUp(signUpDTO:SignUpDTO,image?:any){

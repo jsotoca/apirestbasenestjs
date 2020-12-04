@@ -9,7 +9,7 @@ export class AuthController {
         private readonly authService:AuthService
     ){}
 
-    @Post('/')
+    @Post('/signup')
     @UsePipes(ValidationPipe)
     @UseInterceptors(FileInterceptor('avatar'))
     async signUp(
