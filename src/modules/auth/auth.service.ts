@@ -22,6 +22,7 @@ export class AuthService {
         } 
         const user = await this.userService.signUp(signUpDTO,avatar);
         const token = this.jwtHelpers.generateToken({id:user.id});
+        this.nodeMailerService.sendMailRegister(user.email,user.fullname);
         return {token,user}
     }
 }
