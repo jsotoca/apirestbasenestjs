@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import SignUpDTO from './dto/signup.dto';
 import JwtHelpers from './jwt/jwt';
 import NodeMailerService from 'src/services/nodemailer/nodemailer.service';
+import SignInDTO from './dto/signin.dto';
 
 @Injectable()
 export class AuthService {
@@ -23,6 +24,12 @@ export class AuthService {
         const user = await this.userService.signUp(signUpDTO,avatar);
         const token = this.jwtHelpers.generateToken({id:user.id});
         this.nodeMailerService.sendMailRegister(user.email,user.fullname);
+        return {token,user}
+    }
+
+    async signIn(signInDTO:SignInDTO){
+        const user = await this.userService.signIn(signInDTO);
+        const token = this.jwtHelpers.generateToken({id:user.id});
         return {token,user}
     }
 }

@@ -2,6 +2,7 @@ import { AuthService } from './auth.service';
 import { Body, Controller, Post, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import SignUpDTO from './dto/signup.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import SignInDTO from './dto/signin.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -19,4 +20,13 @@ export class AuthController {
         const image = (avatar)?avatar:null;
         return await this.authService.signUp(signUpDTO,image);
     }
+
+    @Post('/signin')
+    @UsePipes(ValidationPipe)
+    async signIn(
+        @Body() signInDTO:SignInDTO,
+    ){
+        return await this.authService.signIn(signInDTO);
+    }
+
 }
