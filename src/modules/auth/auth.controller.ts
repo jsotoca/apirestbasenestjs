@@ -29,4 +29,12 @@ export class AuthController {
         return await this.authService.signIn(signInDTO);
     }
 
+    @Post('/forgotpassword')
+    @UsePipes(ValidationPipe)
+    async forgotPassword(
+        @Body('email') email:string,
+    ){
+        return await this.authService.forgotPassword(email);
+    }
+
 }

@@ -1,6 +1,6 @@
 import { S3Service } from './../../services/s3/s3.service';
 import { UserService } from './../user/user.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import SignUpDTO from './dto/signup.dto';
 import JwtHelpers from './jwt/jwt';
 import NodeMailerService from 'src/services/nodemailer/nodemailer.service';
@@ -31,5 +31,13 @@ export class AuthService {
         const user = await this.userService.signIn(signInDTO);
         const token = this.jwtHelpers.generateToken({id:user.id});
         return {token,user}
+    }
+
+    async forgotPassword(email:string){
+        const user = await this.userService.getUser(email);
+        if(!user)throw new NotFoundException('email no encontrado en la base de datos.');
+        const token = this.jwtHelpers.generateResetToken(user);
+        await this.nodeMailerService.sendMailResetPassword(user.fullname,user.email,token);
+        return {ok:true,message:'email enviado'};
     }
 }

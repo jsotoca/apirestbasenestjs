@@ -20,4 +20,9 @@ export class UserService {
         const user = await this.userRepository.signIn(signInDTO);
         return user;
     }
+
+    async getUser(email:string){
+        const user = await this.userRepository.findOne({email});
+        return user;
+    }
 }
